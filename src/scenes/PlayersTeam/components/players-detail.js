@@ -7,6 +7,8 @@ import {
     StyleSheet,
 } 
 from 'react-native';
+import { SearchBar } from 'react-native-elements';
+
 import HttpTeam  from '../../../services/team/http-teams';
 import PlayerItem from './players-item';
 import ItemSeparator from '../../Team/components/item-separator';
@@ -15,26 +17,67 @@ class PlayerTeamDetail extends Component{
   constructor(props){
       super(props);
       this.state = {
-          playerList: []
+          playerList: [],
+          team: {},
+          arrayholder: []
       }
   }
 
+  static navigationOptions = {
+    title: 'Jugadores',
+    headerTitleStyle: {
+        fontSize: 18
+    },
+  }
+  
   componentDidMount = () =>{ 
-    name = this.props.navigation.getParam('name', 'no-data') ;
-      this.getplayersByTeam(name);
+      team = this.props.navigation.getParam('team', 'no-data') ;
+      this.setState({
+        team: team
+      })
+      this.getplayersByTeam(team.strTeam);
   }
 
   async getplayersByTeam(name){
       const data = await HttpTeam.getPlayersByTeamName(name);
       this.setState({
-        playerList: data.player
+        playerList: data.player,
+        arrayholder: data.player
       })
-      console.log(data);
   } 
-  renderItem = ( { item }) => <PlayerItem navigation = { this.props.navigation } player = { item } />
+
+  renderHeaderSearchBar = () => {
+    return (
+        <SearchBar
+            placeholder="Buscar Jugador"
+            lightTheme
+            round
+            onChangeText={text => this.searchFilterFunction(text)}
+            autoCorrect={false}
+            clearIcon
+            autoFocus={false}
+        />
+    );
+};
+
+searchFilterFunction = text => {
+    const newData = this.state.arrayholder.filter(item => {            
+        const itemData = `${item.strPlayer.toUpperCase()}`;
+        const textData = text.toUpperCase();
+        //Retorna el Item siempre y cuando exista Información
+        return itemData.indexOf(textData) > -1;
+    });
+
+    console.log(this.state.arrayholder)
+    this.setState({ 
+      playerList: newData,
+    });
+};
+
+  renderItem = ( { item }) => <PlayerItem navigation = { this.props.navigation } player = { item } team = { team } />
   separatorComponent = () => <ItemSeparator />;
   emptyComponent = () => <Text>Jugadores no encontrados</Text>
-  keyExtractor = item => item.idTeam.toString();
+  keyExtractor = item => item.idPlayer.toString();
   render(){
     return (
       <View>
@@ -44,101 +87,10 @@ class PlayerTeamDetail extends Component{
             ItemSeparatorComponent = { this.separatorComponent }
             ListEmptyComponent = { this.emptyComponent }
             keyExtractor = { this.keyExtractor }
+            ListHeaderComponent={this.renderHeaderSearchBar}  
         />
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  containerCol:{
-    flexDirection: 'column',
-    marginLeft: 10,
-  },
-  dataContainer: {
-    color: '#3949AB',
-    borderRadius: 5,
-    borderWidth: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 20,
-
-  },
-  brand: {
-    color: '#3949AB',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  title: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  headerText: {
-    color: '#3949AB',
-    fontSize: 16,
-    marginBottom: 10,
-    fontWeight: "bold"
-  },
-  titleText: {
-    color: '#3949AB',
-    fontSize: 18,
-    marginBottom: 5,
-    fontWeight: "bold"
-  },
-  brandText: {
-    color: '#3949AB',
-    fontSize: 16,
-    marginBottom: 5,
-    fontWeight: "bold"
-  },
-  imageContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {  
-    height: 150,
-    width: 150,
-    resizeMode: 'contain',
-  },
-  price:{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  priceText:{
-    backgroundColor: '#3949AB',
-    padding: 2,
-    color: 'white',
-    fontSize: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    lineHeight: 30
-  },
-  description: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    padding: 20,
-  },
-  descriptionText: {
-    color: '#3949AB',
-    fontSize: 20,
-  },
-  containerButton:{
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonOpacity: {
-    marginBottom: 30,
-    width: 260,
-    alignItems: 'center',
-    backgroundColor: '#3949AB',
-    borderRadius: 20,
-  },
-  buttonTextOpacity: {
-    padding: 20,
-    color: 'white',
-    fontSize: 18
-  }
-});
-
 export default PlayerTeamDetail;

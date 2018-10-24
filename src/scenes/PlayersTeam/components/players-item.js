@@ -8,25 +8,27 @@ import {
 } from 'react-native';
 
 const PlayerItem = (props) => (
+    
     <TouchableHighlight
         // onPress = { ()=> props.navigation.navigate('PlayersScreen',  { name: props.team.strTeam } ) }
         underlayColor = "#ccc"
     >
-        <View style={ styles.container }>
+        <View style={ styles.container }>        
             <View styles={ styles.left }>
                 <Image
-                    style={styles.cover}
-                    source ={{ uri: props.player.strCutout ? props.player.strCutout :  "" }}
+                    style={styles.cover}                    
+                    source ={{ uri: props.player.strCutout ? props.player.strCutout : 'https://www.bestpersonnel.ie/wp-content/uploads/2017/11/Sani-Sebastian.png' }}
                 />
+
                 <View style={ styles.year }>
-                    <Text style={ styles.yearText }>{props.player.dateBorn}</Text>
+                    <Text style={ styles.yearText }>{ props.player.dateBorn }</Text>
                 </View>
             </View>
             <View style={ styles.right }>
-                <Text style={ styles.title }>{props.player.strPlayer}</Text>
-                <Text style={ styles.stadiumLocation }>Nacionalidad : {props.player.strNationality} </Text>
-                <Text style={ styles.stadium }> Equipo: {props.player.strTeam}</Text>
-                <Text style={ styles.stadium }>gdfgdfg</Text>
+                <Text style={ styles.title }>{ props.player.strPlayer }</Text>
+                <Text style={ styles.stadium }> Estatura: { props.player.strHeight }</Text>
+                <Text style={ styles.stadium }> Posición: { props.player.strPosition }</Text>
+                <Text style={ styles.stadium }> Equipo: { props.player.strTeam }</Text>
             </View>
         </View>
     </TouchableHighlight>
@@ -79,8 +81,7 @@ const styles = StyleSheet.create({
         color: '#6b6b6b',
         fontSize: 12,
         fontWeight: 'bold',
-    }
-    
+    },
 })
 
 export default PlayerItem;

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import Players from './../scenes/PlayersTeam/index';
-
+import Team from '../scenes/Team';
 
 const RootStack = createStackNavigator({
     TeamsScreen: {
-        screen: CameraRollScene,
-        title: 'Equipos'
+        screen: Team,
     },
     PlayersScreen: {
         screen: Players,
-        title: 'Jugadores'
-    }
+    },
     },{
         initialRouteName: 'TeamsScreen'
     });

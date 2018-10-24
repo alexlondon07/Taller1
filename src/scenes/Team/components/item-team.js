@@ -9,24 +9,24 @@ import {
 
 const ItemTeam = (props) => (
     <TouchableHighlight
-        onPress = { ()=> props.navigation.navigate('PlayersScreen',  { name: props.team.strTeam } ) }
+        onPress = { ()=> props.navigation.navigate('PlayersScreen',  { team: props.team } ) }
         underlayColor = "#ccc"
     >
         <View style={ styles.container }>
             <View styles={ styles.left }>
                 <Image
                     style={styles.cover}
-                    source ={{ uri: props.team.strTeamBadge ? props.team.strTeamBadge : '' }}
+                    source ={{ uri: props.team.strTeamBadge ? props.team.strTeamBadge : 'https://facebook.github.io/react-native/docs/assets/favicon.png' }}
                 />
                 <View style={ styles.year }>
-                    <Text style={ styles.yearText }>{props.team.intFormedYear ? props.team.intFormedYear: ""}</Text>
+                    <Text style={ styles.yearText }>{props.team.intFormedYear ? props.team.intFormedYear: '00-00-0000' }</Text>
                 </View>
             </View>
             <View style={ styles.right }>
-                <Text style={ styles.stadiumLocation }>{props.team.strStadiumLocation ? props.team.strStadiumLocation: ""} </Text>
-                <Text style={ styles.title }>{props.team.strAlternate ? props.team.strAlternate: ""}</Text>
-                <Text style={ styles.stadium }>Estadio:{ props.team.strStadium ? props.team.strStadium : ""}</Text>
-                <Text style={ styles.stadium }>Manager:{ props.team.strManager ? props.team.strManager: ""}</Text>
+                <Text style={ styles.stadiumLocation }>{props.team.strStadiumLocation ? props.team.strStadiumLocation: '' } </Text>
+                <Text style={ styles.title }>{props.team.strAlternate ? props.team.strAlternate: ''}</Text>
+                <Text style={ styles.stadium }>Estadio:{ props.team.strStadium ? props.team.strStadium : '' }</Text>
+                <Text style={ styles.stadium }>Manager:{ props.team.strManager ? props.team.strManager: '' }</Text>
             </View>
         </View>
     </TouchableHighlight>
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         fontSize: 11
     },
     cover:{
-        height: 120,
-        width: 180,
+        height: 100,
+        width: 120,
         resizeMode: 'contain',
     },
     right:{
