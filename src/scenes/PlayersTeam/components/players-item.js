@@ -16,7 +16,7 @@ const PlayerItem = (props) => (
             <View styles={ styles.left }>
                 <Image
                     style={styles.cover}
-                    source ={{ uri: props.player.strFanart1 ? props.player.strFanart1 :  "" }}
+                    source ={{ uri: props.player.strCutout ? props.player.strCutout :  "" }}
                 />
                 <View style={ styles.year }>
                     <Text style={ styles.yearText }>{props.player.dateBorn}</Text>
