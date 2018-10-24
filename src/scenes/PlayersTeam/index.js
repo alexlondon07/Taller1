@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { 
-    View
+    View,
+    Text
   } from 'react-native';
-import ProductDetail from "./components/product-detail";
+import PlayerTeamDetail from "./components/players-detail";
 
-class CatalogDetail extends Component {
+class Players extends Component {
 
     constructor(props) {
         super(props);
@@ -12,9 +13,9 @@ class CatalogDetail extends Component {
     render() {
         return (
             <View>
-                <ProductDetail navigation={ this.props.navigation } />                  
+                <PlayerTeamDetail navigation={ this.props.navigation } />         
             </View>
         );
     }
 }
-export default CatalogDetail;
+export default Players;

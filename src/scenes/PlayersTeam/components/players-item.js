@@ -7,30 +7,29 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-const ItemTeam = (props) => (
+const PlayerItem = (props) => (
     <TouchableHighlight
-        onPress = { ()=> props.navigation.navigate('PlayersScreen',  { name: props.team.strTeam } ) }
+        // onPress = { ()=> props.navigation.navigate('PlayersScreen',  { name: props.team.strTeam } ) }
         underlayColor = "#ccc"
     >
         <View style={ styles.container }>
             <View styles={ styles.left }>
                 <Image
                     style={styles.cover}
-                    source ={{ uri: props.team.strTeamBadge ? props.team.strTeamBadge : '' }}
+                    source ={{ uri: props.player.strFanart1 ? props.player.strFanart1 :  "" }}
                 />
                 <View style={ styles.year }>
-                    <Text style={ styles.yearText }>{props.team.intFormedYear ? props.team.intFormedYear: ""}</Text>
+                    <Text style={ styles.yearText }>{props.player.dateBorn}</Text>
                 </View>
             </View>
             <View style={ styles.right }>
-                <Text style={ styles.stadiumLocation }>{props.team.strStadiumLocation ? props.team.strStadiumLocation: ""} </Text>
-                <Text style={ styles.title }>{props.team.strAlternate ? props.team.strAlternate: ""}</Text>
-                <Text style={ styles.stadium }>Estadio:{ props.team.strStadium ? props.team.strStadium : ""}</Text>
-                <Text style={ styles.stadium }>Manager:{ props.team.strManager ? props.team.strManager: ""}</Text>
+                <Text style={ styles.title }>{props.player.strPlayer}</Text>
+                <Text style={ styles.stadiumLocation }>Nacionalidad : {props.player.strNationality} </Text>
+                <Text style={ styles.stadium }> Equipo: {props.player.strTeam}</Text>
+                <Text style={ styles.stadium }>gdfgdfg</Text>
             </View>
         </View>
     </TouchableHighlight>
-
 );
 
 const styles = StyleSheet.create({
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
         color: '#44546b'
     },
     stadiumLocation:{
-        backgroundColor: '#70b124',
+        backgroundColor: '#ccc',
         paddingVertical: 4,
         paddingHorizontal: 6,
         color: 'white',
@@ -84,4 +83,4 @@ const styles = StyleSheet.create({
     
 })
 
-export default ItemTeam;
+export default PlayerItem;

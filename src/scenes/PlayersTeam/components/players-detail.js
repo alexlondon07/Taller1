@@ -1,67 +1,50 @@
 import React , {Component}from 'react';
 import {
-    Button,
+    FlatList,
     Text, 
     View,
     Image,
     StyleSheet,
-    TouchableOpacity,
 } 
 from 'react-native';
 import HttpTeam  from '../../../services/team/http-teams';
+import PlayerItem from './players-item';
+import ItemSeparator from '../../Team/components/item-separator';
 
 class PlayerTeamDetail extends Component{
   constructor(props){
       super(props);
       this.state = {
-          product: []
+          playerList: []
       }
   }
 
   componentDidMount = () =>{ 
-      id = this.props.navigation.getParam('id', 'no-data') ;
-      this.getProductById(id);
+    name = this.props.navigation.getParam('name', 'no-data') ;
+      this.getplayersByTeam(name);
   }
 
-  async getProductById(id){
-      const data = await HttpTeam.getProductsById(id);
+  async getplayersByTeam(name){
+      const data = await HttpTeam.getPlayersByTeamName(name);
       this.setState({
-        product: data
+        playerList: data.player
       })
       console.log(data);
   } 
-
+  renderItem = ( { item }) => <PlayerItem navigation = { this.props.navigation } player = { item } />
+  separatorComponent = () => <ItemSeparator />;
+  emptyComponent = () => <Text>Jugadores no encontrados</Text>
+  keyExtractor = item => item.idTeam.toString();
   render(){
     return (
       <View>
-          <View style={styles.dataContainer}>
-            <View style={styles.imageContainer}>
-              <Image style={styles.image}  source={{ uri: this.state.product.avatar  }} />        
-            </View>
-
-            <View style = {styles.containerCol}>
-                <View style={styles.brand}>
-                  <Text style={styles.brandText}> { this.state.product.brand } </Text>    
-                </View>
-              
-                <View style={styles.title}>
-                  <Text style={styles.titleText}>{ this.state.product.name }</Text>
-                  <Text style={styles.priceText}> $ { this.state.product.price } </Text>
-                </View>
-            </View>
-          </View>
-
-          <View style={styles.description}>
-              <Text style={styles.descriptionText}>{ this.state.product.description } </Text>
-          </View>
-
-          <View style={styles.containerButton}>
-            <TouchableOpacity onPress={this._onPressButton}>
-              <View style={styles.buttonOpacity}>
-                <Text style={styles.buttonTextOpacity}>Comprar</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <FlatList
+            data ={ this.state.playerList }
+            renderItem={ this.renderItem }
+            ItemSeparatorComponent = { this.separatorComponent }
+            ListEmptyComponent = { this.emptyComponent }
+            keyExtractor = { this.keyExtractor }
+        />
       </View>
     );
   }

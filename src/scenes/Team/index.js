@@ -3,10 +3,7 @@ import {
     View,
     Text,
     FlatList,
-    Button,
-    AsyncStorage
 } from 'react-native';
-
 import ItemSeparator from './components/item-separator';
 import HttpTeam from "../../services/team/http-teams";
 import ItemTeam from './components/item-team';
@@ -17,6 +14,7 @@ class Team extends Component{
         super(props);
         this.state = {
             teamList: [],
+            arrayholder: []
         }
     }
     componentDidMount = () =>{ 
@@ -27,6 +25,7 @@ class Team extends Component{
         const data = await HttpTeam.getTeams();
         this.setState({
             teamList: data.teams,
+            arrayholder: data
         });
         console.log(data);
     }
