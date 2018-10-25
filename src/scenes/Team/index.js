@@ -4,7 +4,7 @@ import {
     Text,
     FlatList,
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { Icon, SearchBar, ListItem } from 'react-native-elements';
 
 import ItemSeparator from './components/item-separator';
 import HttpTeam from "../../services/team/http-teams";

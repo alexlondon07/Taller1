@@ -8,9 +8,8 @@ import {
 } from 'react-native';
 
 const PlayerItem = (props) => (
-    
     <TouchableHighlight
-        // onPress = { ()=> props.navigation.navigate('PlayersScreen',  { name: props.team.strTeam } ) }
+        onPress = { ()=> props.navigation.navigate('TeamAndPlayerInfoScreen',  { name: props.team } ) }
         underlayColor = "#ccc"
     >
         <View style={ styles.container }>        
