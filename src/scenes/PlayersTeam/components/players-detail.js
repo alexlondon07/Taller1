@@ -5,14 +5,21 @@ import {
     View,
     Image,
     StyleSheet,
+    Dimensions
 } 
 from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import HttpTeam  from '../../../services/team/http-teams';
 import PlayerItem from './players-item';
 import ItemSeparator from '../../Team/components/item-separator';
 import SocialNetwork from '../../Team/components/social-network';
+
+const initialLayout = {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+}
 
 class PlayerTeamDetail extends Component{
     constructor(props){
@@ -20,7 +27,12 @@ class PlayerTeamDetail extends Component{
         this.state = {
             playerList: [],
             team: {},
-            arrayholder: []
+            arrayholder: [],
+            index: 0,
+            routes: [
+                { key: 'first', title: 'Equipo' },
+                { key: 'second', title: 'Jugadores' },
+            ],
         }
     }
 
@@ -72,21 +84,46 @@ class PlayerTeamDetail extends Component{
             playerList: newData,
         });
     };
+
+    firstRoute = () => (
+        <View>
+            <Text>Hola</Text>
+        </View>
+    );
+    
+    secondRoute = () => (
+        <View>
+            <Text>Hola 2</Text>
+        </View>
+    );
+
     renderItem = ( { item }) => <PlayerItem navigation = { this.props.navigation } player = { item } team = { team } />
     separatorComponent = () => <ItemSeparator />;
     emptyComponent = () => <Text>Jugadores no encontrados</Text>
     keyExtractor = item => item.idPlayer.toString();
     render(){
         return (
-            <View>
+            <View style={initialLayout}>
                 <View style={ styles.containerInfoTeam }>
+                    <Text style={ styles.teamTitle }> { this.state.team.strWebsite }</Text>
+                    <Text style={ styles.teamTitle }> Club: { this.state.team.strTeam }</Text>
                     <Image
                         source = { { uri: this.state.team.strTeamBadge ? this.state.team.strTeamBadge: 'https://facebook.github.io/react-native/docs/assets/favicon.png' } }
                         style={ styles.image }
                     />
-                    <Text style={ styles.teamTitle }> Jugadores del club: { this.state.team.strTeam }</Text>
+                    <Text style={ styles.teamTitle }> Manager: { this.state.team.strManager }</Text>
+                    <Text style={ styles.teamTitle }> Estadio: { this.state.team.strStadium }</Text>
                 </View>
                 <SocialNetwork/>
+{/*                 <TabView 
+                    navigationState={this.state}
+                    renderScene={SceneMap({
+                        first: this.firstRoute,
+                        second: this.secondRoute, 
+                    })}
+                    onIndexChange={index => this.setState({ index })}
+                    initialLayout={{ width: Dimensions.get('window').width, height: Dimensions.get('window').height - 10 }}
+                /> */}
                 <FlatList
                     data ={ this.state.playerList }
                     renderItem={ this.renderItem }
@@ -102,8 +139,8 @@ class PlayerTeamDetail extends Component{
 
 const styles = StyleSheet.create({
     image:{
-        width: 120,
-        height: 120,
+        width: 100,
+        height: 100,
         resizeMode: 'cover'
     },
     teamTitle:{
@@ -113,8 +150,15 @@ const styles = StyleSheet.create({
     containerInfoTeam: {
         backgroundColor: '#3949AB',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 10
     },
+    tabView: {
+        flex: 1
+    },
+    container:{
+        flex: 1
+    }
 })
 
 export default PlayerTeamDetail;

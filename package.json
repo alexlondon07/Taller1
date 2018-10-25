@@ -10,9 +10,10 @@
     "@babel/runtime": "^7.1.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
-    "react-navigation": "^2.18.0",
     "react-native-elements": "^0.19.1",
-    "react-native-vector-icons": "^5.0.0"
+    "react-native-tab-view": "^1.2.0",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "^2.18.0"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
