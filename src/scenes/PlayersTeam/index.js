@@ -10,6 +10,14 @@ class Players extends Component {
     constructor(props) {
         super(props);
     }   
+
+    static navigationOptions = {
+        title: 'Listado de Jugadores',
+        headerTitleStyle: {
+            fontSize: 18
+        },
+    }
+
     render() {
         return (
             <View>

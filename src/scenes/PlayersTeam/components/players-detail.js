@@ -12,7 +12,7 @@ import { SearchBar } from 'react-native-elements';
 import HttpTeam  from '../../../services/team/http-teams';
 import PlayerItem from './players-item';
 import ItemSeparator from '../../Team/components/item-separator';
-import TeamInfo from '../../TeamInfo';
+import SocialNetwork from '../../Team/components/social-network';
 
 class PlayerTeamDetail extends Component{
     constructor(props){
@@ -37,7 +37,6 @@ class PlayerTeamDetail extends Component{
             team: team
         })
         this.getplayersByTeam(team.strTeam);
-        console.log('data team ' + team.toString());
     }
 
     async getplayersByTeam(name){
@@ -69,8 +68,6 @@ class PlayerTeamDetail extends Component{
             //Retorna el Item siempre y cuando exista Información
             return itemData.indexOf(textData) > -1;
         });
-
-        console.log(this.state.arrayholder)
         this.setState({ 
             playerList: newData,
         });
@@ -85,10 +82,11 @@ class PlayerTeamDetail extends Component{
                 <View style={ styles.containerInfoTeam }>
                     <Image
                         source = { { uri: this.state.team.strTeamBadge ? this.state.team.strTeamBadge: 'https://facebook.github.io/react-native/docs/assets/favicon.png' } }
-                        style={styles.image}
+                        style={ styles.image }
                     />
-                    <Text style={styles.teamTitle}> Jugadores del club: { this.state.team.strTeam }</Text>
+                    <Text style={ styles.teamTitle }> Jugadores del club: { this.state.team.strTeam }</Text>
                 </View>
+                <SocialNetwork/>
                 <FlatList
                     data ={ this.state.playerList }
                     renderItem={ this.renderItem }
@@ -104,17 +102,15 @@ class PlayerTeamDetail extends Component{
 
 const styles = StyleSheet.create({
     image:{
-        width: 200,
-        height: 200,
+        width: 120,
+        height: 120,
         resizeMode: 'cover'
     },
     teamTitle:{
         color: '#fff',
-        padding: 5,
         fontSize: 14,
     },
     containerInfoTeam: {
-        paddingTop: 10,
         backgroundColor: '#3949AB',
         justifyContent: 'center',
         alignItems: 'center'

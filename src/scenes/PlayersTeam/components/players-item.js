@@ -9,10 +9,10 @@ import {
 
 const PlayerItem = (props) => (
     <TouchableHighlight
-        onPress = { ()=> props.navigation.navigate('TeamAndPlayerInfoScreen',  { name: props.team } ) }
+        onPress = { ()=> props.navigation.navigate('TeamAndPlayerInfoScreen',  { player: props.player } ) }
         underlayColor = "#ccc"
     >
-        <View style={ styles.container }>        
+        <View style={ styles.container }>    
             <View styles={ styles.left }>
                 <Image
                     style={styles.cover}                    
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
         fontSize: 11
     },
     cover:{
-        height: 120,
-        width: 180,
+        height: 100,
+        width: 100,
         resizeMode: 'contain',
     },
     right:{

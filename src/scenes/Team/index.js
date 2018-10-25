@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {
-    View,
+    ScrollView,
     Text,
     FlatList,
 } from 'react-native';
@@ -72,7 +72,7 @@ class Team extends Component{
     keyExtractor = item => item.idTeam.toString();
     render(){
         return (
-            <View>
+            <ScrollView>
                 <FlatList
                     data ={ this.state.teamList }
                     renderItem={ this.renderItem }
@@ -81,7 +81,7 @@ class Team extends Component{
                     keyExtractor = { this.keyExtractor }
                     ListHeaderComponent={this.renderHeaderSearchBar}  
                 />
-            </View>
+            </ScrollView>
         )
     }
 }

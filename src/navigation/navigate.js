@@ -16,7 +16,7 @@ const RootStack = createStackNavigator({
         screen: TeamAndPlayerInfo,
     },
     },{
-        initialRouteName: 'TeamsScreen'
+        initialRouteName: 'TeamsScreen',
     });
 
 class App extends Component {
