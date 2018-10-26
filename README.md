@@ -26,3 +26,7 @@ https://facebook.github.io/react-native/docs/webview
 
 https://www.thesportsdb.com/api/v1/json/1/searchplayers.php?t=Arsenal 
 https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?s=Soccer&c=Spain
+
+
+## Entregable
+![taller]( https://github.com/alexlondon07/Taller1/blob/master/gif/taller.gif)
