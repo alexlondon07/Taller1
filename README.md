@@ -5,10 +5,10 @@
  
 
 ## Requerimientos:
--       Implementar una vista que liste los equipos de la liga española o la que se desee 
--       Cuando el usuario presiona sobre algún equipo se debe ver la lista de los jugadores con su foto, nombre y fecha de nacimiento además de la información básica del club (foto, redes sociales e historia)
--       Si un usuario da tab sobre alguna red social se debe mostrar el sitio web en el componente de “WebView” provisto por react native.
--       Usar la arquitectura y estructura de componentes adecuada
+Implementar una vista que liste los equipos de la liga española o la que se desee 
+Cuando el usuario presiona sobre algún equipo se debe ver la lista de los jugadores con su foto, nombre y fecha de nacimiento además de la información básica del club (foto, redes sociales e historia)
+
+Si un usuario da tab sobre alguna red social se debe mostrar el sitio web en el componente de “WebView” provisto por react native.       Usar la arquitectura y estructura de componentes adecuada
  
 Plus: Usar la librería de iconos para el “>” de la lista de equipos
  
